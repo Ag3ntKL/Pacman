@@ -45,8 +45,4 @@ def VerifCase(tempList):
 
 VerifCase(tempList)
 
-print("\n\n")
-for i in range(len(maze)):
-    print(*maze[i])
-
 print(rightWay)
