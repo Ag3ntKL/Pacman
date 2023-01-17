@@ -14,37 +14,47 @@ for i in range(len(maze)):
     print(*maze[i])
 
 rightWay = []
-
 # Tester les directions
-def VerifCase(tempList):
+def VerifCase(tempList, index):
+    possible = []
     for i in range(len(tempList)):
-        possible = []
         # Droite
+        print(tempList)
         if maze[tempList[i][0]][tempList[i][1]+1] == '0':
             maze[tempList[i][0]][tempList[i][1]] = True
             possible.append((tempList[i][0], tempList[i][1]+1))
+        if maze[tempList[i][0]][tempList[i][1]+1] == 'e':
+            print('arrivé')
+            return 0
         # Gauche
         if maze[tempList[i][0]][tempList[i][1]-1] == '0':
             maze[tempList[i][0]][tempList[i][1]] = True
             possible.append((tempList[i][0], tempList[i][1]-1))
+        if maze[tempList[i][0]][tempList[i][1]-1] == 'e':
+            print('arrivé')
+            return 0
         # Haut
         if maze[tempList[i][0]-1][tempList[i][1]] == '0':
             maze[tempList[i][0]][tempList[i][1]] = True
             possible.append((tempList[i][0]-1, tempList[i][1]))
+        if maze[tempList[i][0]-1][tempList[i][1]] == 'e':
+            print('arrivé')
+            return 0
         # Bas
         if maze[tempList[i][0]+1][tempList[i][1]] == '0':
             maze[tempList[i][0]][tempList[i][1]] = True
             possible.append((tempList[i][0]+1, tempList[i][1]))
+        if maze[tempList[i][0]+1][tempList[i][1]] == 'e':
+            print('arrivé')
+            return 0
 
         if len(possible) == 1:
             rightWay.append(possible[0])
-            tempList = possible
-        else:
-            pass
-        
-    if len(possible) == 1:
-        return VerifCase(tempList)
 
-VerifCase(tempList)
+    tempList = possible
+
+    return VerifCase(tempList, index+1)
+
+VerifCase(tempList, 0)
 
 print(rightWay)
